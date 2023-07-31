@@ -1,8 +1,17 @@
 # PokemonTracker
 
-# DU-VIRT-FSF-PT-02-2023-U-LOLC
-
-
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-HTML-1f425f.svg)](https://www.javascript.com)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-React-1f425f.svg)](https://www.javascript.com)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-MongoDB-1f425f.svg)](https://www.javascript.com)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-Node.js-1f425f.svg)](https://www.javascript.com)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-Express.js-1f425f.svg)](http://expressjs.com/)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-Handle.js-1f425f.svg)](https://handlebarsjs.com/)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-GraphQL-1f425f.svg)](https://graphql.org/)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-CSS-1f425f.svg)](https://www.javascript.com)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
+[![made-with-node.js](https://img.shields.io/badge/Made%20with-Node.js-1f425f.svg)](https://www.javascript.com)
+[![made-with-express.js](https://img.shields.io/badge/Made%20with-Express.js-1f425f.svg)](http://expressjs.com/)
+[![made-with-handle.js](https://img.shields.io/badge/Made%20with-Handle.js-1f425f.svg)](https://handlebarsjs.com/)
 
 ## Getting started
 
