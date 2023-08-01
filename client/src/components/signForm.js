@@ -4,7 +4,7 @@ import { ADD_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 
-const SignupForm = () => {
+const signForm = () => {
   const [useForData, setUseForData] = useState({
     username: "",
     email: "",
@@ -15,7 +15,7 @@ const SignupForm = () => {
   const [addUser] = useMutation(ADD_USER);
   const handInputChange = (event) => {
     const { name, value } = event.target;
-    setUseForData({ ...userFormData, [name]: value });
+    setUseForData({ ...useForData, [name]: value });
   };
 
   const handForSubmit = async (event) => {
@@ -45,3 +45,78 @@ const SignupForm = () => {
       password: "",
     });
   };
+  return (
+    <>
+      <Form noValidate validated={validated} onSubmit={handForSubmit}>
+        <Alert
+          dismissible
+          onClose={() => setShowAlert(false)}
+          show={showAlert}
+          variant="danger"
+        >
+          Error with signup!
+        </Alert>
+
+        <Form.Group>
+          <Form.Label htmlFor="username">Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Pokemon Trainer username"
+            name="username"
+            onChange={handInputChange}
+            value={useForData.username}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Username needed!
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Your email address"
+            name="email"
+            onChange={handInputChange}
+            value={useForData.email}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Email needed!
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Your password"
+            name="password"
+            onChange={handInputChange}
+            value={useForData.password}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Password needed!
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Button
+          disabled={
+            !(
+              useForData.username &&
+              useForData.email &&
+              useForData.password
+            )
+          }
+          type="submit"
+          variant="success"
+        >
+          Submit
+        </Button>
+      </Form>
+    </>
+  );
+};
+
+export default signForm;
