@@ -41,3 +41,47 @@ const logForm = () => {
           password: "",
         });
       };
+      return (
+        <>
+          <Form noValidate validated={validated} onSubmit={handFormSubmit}>
+            <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+              Wrong login credentials!
+            </Alert>
+            <Form.Group className='mb-3'>
+              <Form.Label htmlFor='email'>Email</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='email please'
+                name='email'
+                onChange={handInputChange}
+                value={userFormData.email}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Email is required to see Pokemon!</Form.Control.Feedback>
+            </Form.Group>
+    
+            <Form.Group className='mb-3'>
+              <Form.Label htmlFor='password'>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='password please'
+                name='password'
+                onChange={handInputChange}
+                value={useForData.password}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>Password is required to see POKEMON!</Form.Control.Feedback>
+            </Form.Group>
+            <Button
+              disabled={!(useForData.email && useForData.password)}
+              type='submit'
+              variant='success'>
+              Submit
+            </Button>
+          </Form>
+        </>
+      );
+    };
+    
+    export default logForm;
+    
