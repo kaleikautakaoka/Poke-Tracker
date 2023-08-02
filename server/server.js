@@ -5,6 +5,7 @@ const path = require('path');
 const authMiddleware = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
+const { type } = require('os');
 const PORT = process.env.PORT || 3001;
 const app = express();
 // server = new server instance that will be passed into ApolloServer
@@ -33,16 +34,16 @@ app.get('*', (req, res) => {
 );
 
 // function that will start the server
-const startServer = async () => {
+const startServer = async (typeDefs, resolvers) => {
     await server.start();
     server.applyMiddleware({ app });
     db.once('open', () => {
         app.listen(PORT, () => {
             console.log(`API server running on port ${PORT}!`);
-    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`🚀 GraphQL Server ready at http://localhost:${PORT}${server.graphqlPath}`);
         });
     });
 };
 
 //calling the function that started the server
-startServer();
+startServer(typeDefs, resolvers);

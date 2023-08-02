@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Category, Pokemon, SavedPokemon } = require('../models');
+const { Category, Pokemon, User, SavedPokemon, gen1_species, gen2_species, gen3_species, gen4_species, gen5_species, generations, pokemon_species, pokemon_v2_pokemonspecies_aggregate, TestPokeApidata  } = require('../models');
 const { signToken } = require('../utils/auth');
+const { populate } = require('../models/Category');
 // stripe payment
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -8,10 +9,56 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
     Query: {
+                // // Gets all the pokemon belonging to generation 3
+        // gen3_species: pokemon_v2_pokemonspecies(where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}, order_by: {id: asc}) {
+        //   name
+        //   id
+        // }
+        // // You can run multiple queries at the same time
+        // // Counts how many pokemon where release for each generation
+        // generations: pokemon_v2_generation {
+        //   name
+        //   pokemon_species: pokemon_v2_pokemonspecies_aggregate {
+        //     aggregate {
+        //       count
+        //     }
+        //   }
+        // }
+
+        // gen3_species: async (parent, args, context) => {
+        //     if (pokemon_v2_generation) {
+        //         const pokemon = await Pokemon.findById(pokemon_v2_generation).populate({
+        //             path: 'category.pokemon_v2_generation.name', populate: 'category'});
+        //         path: 'category.pokemon_v2_generation.name',
+        //         populate: 'category'
+        //     };
+        //         return pokemon;
+        //     };
+        // },
+
+        TestPokeApidata: async () => {
+            return await TestPokeApidata.find();
+        },
+        generations: async (parent, { TestPokeApidata, name }) => {
+            const params = {};
+
+            if (TestPokeApidata) {
+                params.TestPokeApidata = TestPokeApidata;
+            }  
+            if (name) {
+                params.name = {
+                    $regex: name
+                };
+               
+            }
+            return await generations.find(params).populate('TestPokeApidata');
+        },
+
+
         category: async () => {
             return await Category.find();
         },
-        Pokemon: async (parent, { category, name }) => {
+        pokemon: async (parent, { category, name }) => {
             const params = {};
 
             if (category) {
@@ -43,6 +90,7 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
+
         savedPokemon: async (parent, { _id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
@@ -60,7 +108,7 @@ const resolvers = {
             const donate = new Donate({ pokemons: args.pokemons });
             const line_items = [];
 
-            const { pokemons } = await donate.populate('pokemons').execPopulate();
+            const { pokemons } = await donate.populate('pokemons');
 
             for (let i = 0; i < pokemons.length; i++) {
                 // generate pokemon donate id for stripe
@@ -94,6 +142,7 @@ const resolvers = {
             return { session: session.id };
         }
     },
+
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password });

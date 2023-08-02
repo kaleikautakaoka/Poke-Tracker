@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
+import { Redirect, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';  
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { loginUser } from '../utils/API';
+import { Auth } from '../utils/auth';
+
+//edit this to match the login form
+//kill bugs
 
 const logForm = () => {
     const [useForData, setUseForData] = useState({ email: '', password: '' });
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [login] = useMutation(LOGIN_USER);const handInputChange = (event) => {
+    
+    const [login] = useMutation(loginUser);const handInputChange = (event) => {
         const { name, value } = event.target;
         setUseForData({ ...useForData, [name]: value });
       };
@@ -84,4 +90,3 @@ const logForm = () => {
     };
     
     export default logForm;
-    

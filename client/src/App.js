@@ -6,19 +6,29 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+//import pages and list them here
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import NotFound from './pages/NotFound';
+import Donate from './pages/Donate';
+import SavedPoke from './pages/SavedPoke';
+import SearchPoke from './pages/SearchPoke';
+import ThankYou from './pages/ThankYou';
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem('id_token');
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
@@ -31,23 +41,10 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApolloProvider client={client}>
+      <Router>
+        <div>
+          
 }
 
 export default App;
