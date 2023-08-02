@@ -17,7 +17,7 @@ const typeDefs = gql`
         category: Category
     }
 
-    SavedPokemon {
+    type SavedPokemon {
         _id: ID
         donateDate: String
         pokemon: [Pokemon]
@@ -32,7 +32,7 @@ const typeDefs = gql`
         savedpokemons: [SavedPokemon]
     }
 
-    Donate {
+    type Donate {
         session: ID
     }
 
