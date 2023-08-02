@@ -6,8 +6,22 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        user: async () => {
-            return user.find().populate('categories');
+        categories: async () => {
+            return await category.find();
         },
-        category: async (parent, { name }) => {
+        pokemons: async (parent, { category, name }) => {
+            const params = {};
+
+            if (category) {
+                params.category = category;
+            }
+
+            if (name) {
+                params.name = {
+                    $regex: name
+                };
+            }
+
+            return await pokeCard.find(params).populate('category');
+        }
             
