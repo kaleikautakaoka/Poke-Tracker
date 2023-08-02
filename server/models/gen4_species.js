@@ -16,3 +16,5 @@ const gen4_speciesSchema = new Schema({
 });
 
 const gen4_species = mongoose.model('gen4_species', gen4_speciesSchema);
+
+module.exports = gen4_species;

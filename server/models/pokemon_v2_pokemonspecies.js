@@ -11,3 +11,5 @@ const pokemon_speciesSchema = new Schema({
 });
 
 const pokemon_species = mongoose.model('pokemon_species', pokemon_speciesSchema);
+
+module.exports = pokemon_species;

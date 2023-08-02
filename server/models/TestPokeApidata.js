@@ -16,3 +16,5 @@ const testPokeApidataSchema = new Schema({
 });
 
 const testPokeApidata = mongoose.model('testPokeApidata', testPokeApidataSchema);
+
+module.exports = testPokeApidata;

@@ -103,8 +103,11 @@ const typeDefs = gql`
         gen2_species: [gen2_species]
         gen4_species: [gen4_species]
         gen5_species: [gen5_species]
+        pokemon_species(pokemon_v2_generation: aggregate): [pokemon_species]
+        pokemon_species: generations
         pokemon_species: [pokemon_species]
         pokemon_species: TestPokeApidata
+        generations: TestPokeApidata
         pokemon_v2_pokemonspecies_aggregate: [pokemon_v2_pokemonspecies_aggregate]
         donate:(pokemon: [ID]!): Donate
         gen1_species(where: {pokemon_v2_generation: {name: {_eq: "generation-i"}}}, order_by: {id: asc}) {
