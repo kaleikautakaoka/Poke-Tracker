@@ -45,17 +45,24 @@ const typeDefs = gql`
         categories: [Category]
         pokemons(category: ID, name: String): [Pokemon]
         Pokemon(_id: ID!): Pokemon
-        user: User
+        user: [User]!
+        user(userId: ID!): User
         savedPokemon(--_id: ID!): SavedPokemon
         donate(session [ID]): Donate
+        me: User
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
+        
+        updateUser(username: String, email: String, password: String): User
+
         savePokemon(pokemon: [ID]!): SavedPokemon
         removePokemon(pokemon: ID!): SavedPokemon
-        updateUser(username: String, email: String, password: String): User
-        login(email: String!, password: String!): Auth
+
+        removeUser: User
+
     }
         
 `;
