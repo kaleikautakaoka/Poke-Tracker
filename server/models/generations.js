@@ -4,30 +4,24 @@ const { aggregate } = require('./aggregate');
 const { Schema } = mongoose;
 
 const generationsSchema = new Schema({
-   generations : [
-         {
+    generations: [
+        {
             name: {
                 type: String,
                 required: true,
                 unique: true
             },
-            pokemon_species: [
-                {
-                    type: String,
+            pokemon_species: {
+                aggregate: {
+                    type: Number,
                     required: true,
-                    unique: false
-                },
-                aggregate: [
-                    {
-                        type: Integer,
-                        required: true,
-                        unique: false
-                    }
-   ]
-]}
-   ]
-
+                    unique: true
+                }
+            }
+        }
+    ]
 });
+
 
 const generations = mongoose.model('generations', generationsSchema);
 
