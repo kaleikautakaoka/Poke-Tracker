@@ -1,6 +1,6 @@
-const School = require('./pokecard');
-const Class = require('./pokemisc');
-const Professor = require('./pokeplush');
-const Professor = require('./user');
+const Category = require('./Category');
+const Pokemon = require('./Pokemon');
+const User = require('./User');
+const SavedPokemon = require('./SavedPokemon');
 
-module.exports = { pokecard, pokemisc, pokeplush, user};
+module.exports = { Category, Pokemon, User, SavedPokemon };

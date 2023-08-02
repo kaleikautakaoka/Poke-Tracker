@@ -1,44 +1,41 @@
-const { gql } = require('apollo-server-express');
-
+const { gql } = require("apollo-server-express");
 
 //Object types for appolo server
 const typeDefs = gql`
-    type user {
+
+    type Category {
+        _id: ID
+        name: String
+        pokemon: [Pokemon]
+   }
+
+    type Pokemon {
+        _id: ID
+        name: String
+        image: String
+        description: String
+        category: Category
+    }
+
+    SavedPokemon {
+        _id: ID
+        name: String
+        image: String
+        description: String
+        category: Category
+    }
+
+    type User {
         _id: ID
         username: String
         email: String
         password: String
         categories: [Category]
+        savedpokemons: [SavedPokemon]
     }
 
-    type category {
-        _id: ID
-        name: String
-        pokemons: [Pokemon]
-    }
-
-    type pokeCard {
-        _id: ID
-        name: String
-        image: String
-        description: String
-        category: Category
-    }
-
-    type pokeMisc {
-        _id: ID
-        name: String
-        image: String
-        description: String
-        category: Category
-    }
-
-    type PokePlush {
-        _id: ID
-        name: String
-        image: String
-        description: String
-        category: Category
+    Donate {
+        session: ID
     }
 
     type Auth {
@@ -47,21 +44,22 @@ const typeDefs = gql`
     }
 
     type Query {
-        me: User
-        users: [User]
-        user(username: String!): User
         categories: [Category]
-        category(name: String!): Category
-        pokemons(category: String): [Pokemon]
-        pokemon(_id: ID!): Pokemon
+        pokemons(category: ID, name: String): [Pokemon]
+        Pokemon(_id: ID!): Pokemon
+        user: User
+        savedPokemon(--_id: ID!): SavedPokemon
+        donate(session [ID]): Donate
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
-        addCategory(name: String!): Category
-        addPokemon(name: String!, image: String!, description: String!, category: String!): Pokemon
+        savePokemon(pokemon: [ID]!): SavedPokemon
+        removePokemon(pokemon: ID!): SavedPokemon
+        updateUser(username: String, email: String, password: String): User
         login(email: String!, password: String!): Auth
     }
+        
 `;
 
 module.exports = typeDefs;
