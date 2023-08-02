@@ -19,10 +19,8 @@ const typeDefs = gql`
 
     SavedPokemon {
         _id: ID
-        name: String
-        image: String
-        description: String
-        category: Category
+        donateDate: String
+        pokemon: [Pokemon]
     }
 
     type User {

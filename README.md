@@ -1,4 +1,4 @@
-# PokemonTracker
+# Poke-Tracker
 
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-HTML-1f425f.svg)](https://www.javascript.com)
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-React-1f425f.svg)](https://www.javascript.com)
@@ -13,23 +13,36 @@
 [![made-with-express.js](https://img.shields.io/badge/Made%20with-Express.js-1f425f.svg)](http://expressjs.com/)
 [![made-with-handle.js](https://img.shields.io/badge/Made%20with-Handle.js-1f425f.svg)](https://handlebarsjs.com/)
 
-## Getting started
+## Welcome To Poke-Tracker!
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Poke-Tracker is a full-stack application that allows users to search for Pokemon and add them to their team. Users may also make donations to the Poke-Tracker team to help keep the site running.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Table of Contents
 
-## Add your files
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
+## Installation
+
+To install the necessary dependencies, run the following command:
+
+```Visit github and clone the repo. Run npm install to install all dependencies.```
+
+- [ ] [Link to repo](https://github.com/kaleikautakaoka/Poke-Tracker.git)
+
+
+## Usage
+
+```Visit the deployed site```
+- [ ] [Link to deployed site](https://poketracker.herokuapp.com/)
+
+```Search for Pokemon```
+
+
+- [ ] [PokeTracker Link](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
 - [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://du.bootcampcontent.com/denver-coding-bootcamp/DU-VIRT-FSF-PT-02-2023-U-LOLC.git
-git branch -M main
-git push -uf origin main
-```
 
 ## Integrate with your tools
 
