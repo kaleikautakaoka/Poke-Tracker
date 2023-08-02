@@ -7,7 +7,54 @@ const typeDefs = gql`
         _id: ID
         name: String
         pokemon: [Pokemon]
-   }
+    }
+
+    type gen3_species {
+         name: String
+            id: ID
+    }
+
+    type generations {
+        name: String
+        pokemon_species: pokemon_v2_pokemonspecies_aggregate {
+            aggregate {
+                count
+            }
+        }
+    }
+
+    type pokemon_species {
+        pokemon_v2_pokemonspecies_aggregate {
+            aggregate {
+                count
+            }
+        }
+    }
+
+    type gen1_species {
+        name: String
+        id: ID
+    }
+
+    type gen2_species {
+        name: String
+        id: ID
+    }
+
+    type gen4_species {
+        name: String
+        id: ID
+    }
+
+    type gen5_species {
+        name: String
+        id: ID
+    }
+
+    type TestPokeApidata {
+        name: String
+        id: ID
+    }
 
     type Pokemon {
         _id: ID
@@ -50,6 +97,37 @@ const typeDefs = gql`
         savedPokemon(--_id: ID!): SavedPokemon
         donate(session [ID]): Donate
         me: User
+        gen3_species: [gen3_species]
+        generations: [generations]
+        gen1_species: [gen1_species]
+        gen2_species: [gen2_species]
+        gen4_species: [gen4_species]
+        gen5_species: [gen5_species]
+        pokemon_species: [pokemon_species]
+        pokemon_species: TestPokeApidata
+        pokemon_v2_pokemonspecies_aggregate: [pokemon_v2_pokemonspecies_aggregate]
+        donate:(pokemon: [ID]!): Donate
+        gen1_species(where: {pokemon_v2_generation: {name: {_eq: "generation-i"}}}, order_by: {id: asc}) {
+            name
+            id
+        }
+        gen2_species(where: {pokemon_v2_generation: {name: {_eq: "generation-ii"}}}, order_by: {id: asc}) {
+            name
+            id
+        }
+        gen3_species(where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}, order_by: {id: asc}) {
+            name
+            id
+        }
+        gen4_species(where: {pokemon_v2_generation: {name: {_eq: "generation-iv"}}}, order_by: {id: asc}) {
+            name
+            id
+        }
+        gen5_species(where: {pokemon_v2_generation: {name: {_eq: "generation-v"}}}, order_by: {id: asc}) {
+            name
+            id
+        }
+
     }
 
     type Mutation {
@@ -62,6 +140,16 @@ const typeDefs = gql`
         removePokemon(pokemon: ID!): SavedPokemon
 
         removeUser: User
+
+        testingPokeApi: 
+
+        gen3_species: [gen3_species]
+        generations: [generations]
+        gen1_species: [gen1_species]
+        generations(pokemon_v2_generation: {name: {_eq: "generation-i"}}): TestPokeApidata
+
+        addPokeTest(name: String!, id: ID!): TestPokeApidata
+
 
     }
         
