@@ -60,7 +60,7 @@ const resolvers = {
             const donate = new Donate({ pokemons: args.pokemons });
             const line_items = [];
 
-            const { pokemons } = await donate.populate('pokemons').execPopulate();
+            const { pokemons } = await donate.populate('pokemons');
 
             for (let i = 0; i < pokemons.length; i++) {
                 // generate pokemon donate id for stripe
