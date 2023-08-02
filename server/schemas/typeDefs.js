@@ -3,13 +3,13 @@ const { gql } = require("apollo-server-express");
 //Object types for appolo server
 const typeDefs = gql`
 
-    type category {
+    type Category {
         _id: ID
         name: String
-        pokemons: [Pokemon]
+        pokemon: [Pokemon]
    }
 
-    type pokemon {
+    type Pokemon {
         _id: ID
         name: String
         image: String
@@ -17,7 +17,7 @@ const typeDefs = gql`
         category: Category
     }
 
-    savedPokemon {
+    SavedPokemon {
         _id: ID
         name: String
         image: String
@@ -25,12 +25,17 @@ const typeDefs = gql`
         category: Category
     }
 
-    type user {
+    type User {
         _id: ID
         username: String
         email: String
         password: String
         categories: [Category]
+        savedpokemons: [SavedPokemon]
+    }
+
+    Donate {
+        session: ID
     }
 
     type Auth {
@@ -41,15 +46,16 @@ const typeDefs = gql`
     type Query {
         categories: [Category]
         pokemons(category: ID, name: String): [Pokemon]
-        pokemon(_id: ID!): Pokemon
+        Pokemon(_id: ID!): Pokemon
         user: User
-        savedPokemon(--_id: ID!): savedPokemon
+        savedPokemon(--_id: ID!): SavedPokemon
+        donate(session [ID]): Donate
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
-        savePokemon(pokemon: [ID]!): savedPokemon
-        removePokemon(pokemon: ID!): savedPokemon
+        savePokemon(pokemon: [ID]!): SavedPokemon
+        removePokemon(pokemon: ID!): SavedPokemon
         updateUser(username: String, email: String, password: String): User
         login(email: String!, password: String!): Auth
     }
