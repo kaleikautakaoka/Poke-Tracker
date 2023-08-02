@@ -17,6 +17,14 @@ const typeDefs = gql`
         category: Category
     }
 
+    savedPokemon {
+        _id: ID
+        name: String
+        image: String
+        description: String
+        category: Category
+    }
+
     type user {
         _id: ID
         username: String
@@ -32,8 +40,19 @@ const typeDefs = gql`
 
     type Query {
         categories: [Category]
-        category(categoryId: ID, name: String!): Category
-        users: [User]
+        pokemons(category: ID, name: String): [Pokemon]
+        pokemon(_id: ID!): Pokemon
+        user: User
+        savedPokemon(--_id: ID!): savedPokemon
+    }
+
+    type Mutation {
+        addUser(username: String!, email: String!, password: String!): Auth
+        savePokemon(pokemon: [ID]!): savedPokemon
+        removePokemon(pokemon: ID!): savedPokemon
+        updateUser(username: String, email: String, password: String): User
+        login(email: String!, password: String!): Auth
+    }
         
 `;
 
