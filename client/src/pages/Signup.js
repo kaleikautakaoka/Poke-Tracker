@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { ADD_USER } from "../utils/mutations";
@@ -19,7 +20,7 @@ const signForm = () => {
     setUserFormData({ ...useForData, [name]: value });
   };
 
-  
+
 
   const handForSubmit = async (event) => {
     event.preventDefault();

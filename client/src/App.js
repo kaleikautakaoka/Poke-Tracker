@@ -70,4 +70,4 @@ function App() {
           
 }
 
-export default client;
+export default App;
