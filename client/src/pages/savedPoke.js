@@ -22,11 +22,11 @@ const savedPokemons = () => {
       return false;
     }
     try {
-      const { data } = await removePokemon({ variables: { bookId } });
+      const { data } = await removePokemon({ variables: { pokemonId } });
       if (!data) {
         throw new Error("something went wrong!");
       }
-      removeBookId(bookId);
+      removePokemonId(pokemonId);
     } catch (err) {
       console.error(err);
     }
