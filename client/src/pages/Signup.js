@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 
 const signForm = () => {
-  const [useForData, setUseForData] = useState({
+  const [useForData, setUserFormData] = useState({
     username: "",
     email: "",
     password: "",
@@ -13,10 +13,13 @@ const signForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [addUser] = useMutation(ADD_USER);
+
   const handInputChange = (event) => {
     const { name, value } = event.target;
-    setUseForData({ ...useForData, [name]: value });
+    setUserFormData({ ...useForData, [name]: value });
   };
+
+  
 
   const handForSubmit = async (event) => {
     event.preventDefault();

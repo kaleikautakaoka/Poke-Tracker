@@ -15,16 +15,21 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 import Donate from './pages/Donate';
-import SavedPoke from './pages/SavedPoke';
-import SearchPoke from './pages/SearchPoke';
+
+
 import ThankYou from './pages/ThankYou';
+import NAV from './components/Nav';
+
+require ('dotenv').config();
+const { GITHUB_TOKEN } = process.env;
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'https://github.com/kaleikautakaoka/Poke-Tracker',
 });
 
+
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = GITHUB_TOKEN;
   return {
     headers: {
       ...headers,
@@ -43,8 +48,26 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <>
+        <NAV>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/donate' element={<Donate />} />
+            <Route path='/savedPoke' element={<savedPoke />} />
+            <Route path='/searchPoke' element={<searchPoke />} />
+            <Route path='/thankyou' element={<ThankYou />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </NAV>
+
+        </>
+      </Router>
+    </ApolloProvider>
+  );
+
           
 }
 
-export default App;
+export default client;
