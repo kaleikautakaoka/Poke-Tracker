@@ -24,7 +24,7 @@ require ('dotenv').config();
 const { GITHUB_TOKEN } = process.env;
 
 const httpLink = createHttpLink({
-  uri: 'https://github.com/kaleikautakaoka/Poke-Tracker',
+  uri: 'https://api.github.com/graphql',
 });
 
 
