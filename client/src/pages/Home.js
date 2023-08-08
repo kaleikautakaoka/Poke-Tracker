@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PokemonEntry from './PokemonEntry';
 import './App.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -130,6 +129,7 @@ function App() {
       </div>
       {error && <p className="error-message">{error}</p>}
       {pokemonData && (
+        error
       )}
       {pokemonData && pokemonData.name !== '' && (
         <div className="row">
