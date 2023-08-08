@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import {
   ApolloClient,
@@ -50,7 +50,7 @@ function App() {
       <Router>
         <>
         <NAV>
-          <Routes>
+          
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
@@ -59,7 +59,7 @@ function App() {
             <Route path='/searchPoke' element={<searchPoke />} />
             <Route path='/thankyou' element={<ThankYou />} />
             <Route path='*' element={<NotFound />} />
-          </Routes>
+          
         </NAV>
 
         </>
