@@ -1,4 +1,8 @@
 import React from "react";
+import { removePokemonId } from "../utils/localStorage";
+import { useQuery, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+
 import {
   Jumbotron,
   Container,
@@ -6,7 +10,6 @@ import {
   Card,
   Button,  
 } from "react-bootstrap";
-import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 import { REMOVE_POKEMON  } from "../utils/mutations";
