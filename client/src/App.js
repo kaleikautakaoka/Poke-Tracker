@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 import {
   ApolloClient,
@@ -14,17 +19,22 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
-import Donate from './pages/Donate';
-import SavedPoke from './pages/SavedPoke';
-import SearchPoke from './pages/SearchPoke';
+import Donate from './components/Donation/Donate';
+
+
 import ThankYou from './pages/ThankYou';
+import NAV from './components/Nav';
+
+require ('dotenv').config();
+const { GITHUB_TOKEN } = process.env;
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'https://api.github.com/graphql',
 });
 
+
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = GITHUB_TOKEN;
   return {
     headers: {
       ...headers,
@@ -43,7 +53,25 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <>
+        <NAV>
+          
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/donate' element={<Donate />} />
+            <Route path='/savedPoke' element={<savedPoke />} />
+            <Route path='/searchPoke' element={<searchPoke />} />
+            <Route path='/thankyou' element={<ThankYou />} />
+            <Route path='*' element={<NotFound />} />
+          
+        </NAV>
+
+        </>
+      </Router>
+    </ApolloProvider>
+  );
+
           
 }
 

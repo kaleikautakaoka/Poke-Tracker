@@ -15,5 +15,11 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "engines": {
+    "node": "18.17.0"
+  },
+  "volta": {
+    "node": "18.17.0"
   }
 }

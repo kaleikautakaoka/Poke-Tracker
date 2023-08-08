@@ -108,9 +108,9 @@ export const updateUser = async (userData, token) => {
 
 
 // export variables that gets a token, fetches user data, creates users, login users, saves pokemon, removes pokemon, and updates users and connects to the pokeApi
-export const getPokemonData = async (pokName, method, object) => {
+export const getPokemonData = async (query) => {
     return new Promise((resolve, reject) => {
-        const url = `https://pokeapi.co/api/v2/${method}/${object}/${pokName}`;
+        const url = `https://beta.pokeapi.co/graphql/v1beta${query}`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
