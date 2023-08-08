@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { SEARCH_QUERY } from './graphqlQueries'; // Define your GraphQL query
+import NotFound from './NotFound';
 
 const SearchPage = () => {
-  // State to hold the search query and search results
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  const [search, { loading, data }] = useLazyQuery(SEARCH_QUERY);
 
-  // Function to handle the search query change
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
 
-  // Function to handle the search button click
   const handleSearch = () => {
-    // no functional code, needs to be added.
-    const dummyResults = ['Result 1', 'Result 2', 'Result 3'];
-    setResults(dummyResults);
+    search({ variables: { query } });
   };
 
   return (
@@ -28,10 +26,17 @@ const SearchPage = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <div>
-        {/* Display the search results */}
-        {results.map((result, index) => (
-          <div key={index}>{result}</div>
-        ))}
+        {loading ? (
+          <p>Loading...</p>
+        ) : data && data.search.length === 0 ? (
+          <NotFound />
+        ) : (
+          data &&
+          data.search.map((result) => (
+            <div key={result.id}>{result.title}</div>
+            // Render other result data as needed
+          ))
+        )}
       </div>
     </div>
   );
