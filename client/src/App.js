@@ -1,5 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 import {
   ApolloClient,
@@ -14,7 +19,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
-import Donate from './pages/Donate';
+import Donate from './components/Donation/Donate';
 
 
 import ThankYou from './pages/ThankYou';
