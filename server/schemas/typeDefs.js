@@ -4,10 +4,11 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
 
     type Category {
+        _id: ID
         name: String
     }
    
-    type pokemonSchema {
+    type Pokemon {
         name: String
         image: String
         description: String
@@ -15,32 +16,32 @@ const typeDefs = gql`
         category: Category
     }  
 
-    type gen3_species {
+    type Gen3_species {
          name: String
         _id: ID
     }
 
-    type generations {
+    type Generations {
         name: String
-        pokemon_species: Int
+        pokemon_species: [pokemon_species]
     }
 
-    type gen1_species {
+    type Gen1_species {
         name: String
         _id: ID
     }
 
-    type gen2_species {
+    type Gen2_species {
         name: String
        _id: ID
     }
 
-    type gen4_species {
+    type Gen4_species {
         name: String
         _id: ID
     }
 
-    type gen5_species {
+    type Gen5_species {
         name: String
         _id: ID
     }
@@ -48,14 +49,6 @@ const typeDefs = gql`
     type TestPokeApidata {
         name: String
         _id: ID
-    }
-
-    type Pokemon {
-        _id: ID
-        name: String
-        image: String
-        description: String
-        category: Category
     }
 
     type SavedPokemon {
@@ -71,10 +64,6 @@ const typeDefs = gql`
         password: String
         categories: [Category]
         savedpokemons: [SavedPokemon]
-    }
-
-    type Donate {
-        session: ID
     }
 
     type Auth {
