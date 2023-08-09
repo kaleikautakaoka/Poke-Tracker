@@ -12,11 +12,11 @@ const generationsSchema = new Schema({
                 unique: true
             },
             pokemon_species: {
-                aggregate: {
+               
                     type: Number,
                     required: true,
                     unique: true
-                }
+                
             }
         }
     ]

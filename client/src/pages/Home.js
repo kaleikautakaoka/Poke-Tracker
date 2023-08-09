@@ -1,159 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import PokemonEntry from './Pokemonentry';
+import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { ADD_POKEMON } from '../../utils/mutations';
+import { QUERY_POKEMONS, QUERY_ME } from '../../utils/queries';
 
-function App() {
-  const [pokemonName, setPokemonName] = useState('');
-  const [pokemonData, setPokemonData] = useState(null);
-  const [error, setError] = useState('');
-  const [pokemonEntries, setPokemonEntries] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const [sortBy, setSortBy] = useState('name'); // Default sort by name
-  const [filterAbilities, setFilterAbilities] = useState(false);
-  const [filterTypes, setFilterTypes] = useState(false);
 
-  useEffect(() => {
-    fetchPokemonEntries();
-  }, [pageNumber, sortBy, filterAbilities, filterTypes]);
+import Badges from '../Badges/index';
+import Auth from '../../utils/auth';
 
-  const handleInputChange = (e) => {
-    setPokemonName(e.target.value);
-  };
+import { Card, Form, Button } from 'react-bootstrap';
 
-  const handleSearch = async () => {
-    try {
-      setError('');
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`);
-      setPokemonData(response.data);
 
-      // Add the fetched Pokemon entry to the server
-      try {
-        const serverResponse = await axios.post('/api/pokemon', {
-          name: response.data.name,
-          image: response.data.sprites.front_default,
-          type: response.data.types[0].type.name, // Assuming the first type represents the main type
-        });
-        setPokemonEntries([...pokemonEntries, serverResponse.data]);
-      } catch (err) {
-        setError('Failed to add the Pokemon.');
-      }
-    } catch (err) {
-      setError('Pokemon not found. Please enter a valid name.');
-      setPokemonData(null);
-    }
-  };
+const PokemonCard = ({
+    _id,
+    number,
+    pokeName,
+    pokeType,
+    image,
+}) => {
 
-  const handleDelete = async (name) => {
-    try {
-      // Delete the Pokemon entry from the server
-      await axios.delete(`/api/pokemon/${name}`);
-      const updatedEntries = pokemonEntries.filter((entry) => entry.name !== name);
-      setPokemonEntries(updatedEntries);
-    } catch (err) {
-      setError('Failed to delete the Pokemon entry.');
-    }
-  };
+    // console.log(pokemon.pokeName)
 
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-    setPageNumber(1); // Reset the page number when sorting changes
-    setPokemonEntries([]); // Clear existing entries when sorting changes
-    setHasMore(true); // Reset infinite scroll
-  };
+    const [shiny, setShiny] = useState(false);
 
-  const handleFilterAbilitiesChange = () => {
-    setFilterAbilities(!filterAbilities);
-    setPageNumber(1); // Reset the page number when filter changes
-    setPokemonEntries([]); // Clear existing entries when filter changes
-    setHasMore(true); // Reset infinite scroll
-  };
+    // console.log(number);
 
-  const handleFilterTypesChange = () => {
-    setFilterTypes(!filterTypes);
-    setPageNumber(1); // Reset the page number when filter changes
-    setPokemonEntries([]); // Clear existing entries when filter changes
-    setHasMore(true); // Reset infinite scroll
-  };
+    const { data } = useQuery(QUERY_POKEMONS);
+    const pokemons = data?.pokemons || [];
 
-  const fetchPokemonEntries = async () => {
-    try {
-      let apiUrl = `/api/pokemon?page=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`;
-      if (filterAbilities) {
-        apiUrl += '&filterAbilities=true';
-      }
-      if (filterTypes) {
-        apiUrl += '&filterTypes=true';
-      }
+    const { data2 } = useQuery(QUERY_ME);
+    const me = data2?.me || [];
 
-      const response = await axios.get(apiUrl);
-      const newEntries = response.data;
-      if (newEntries.length === 0) {
-        setHasMore(false);
-      } else {
-        setPokemonEntries([...pokemonEntries, ...newEntries]);
-      }
-    } catch (err) {
-      setError('Failed to fetch Pokemon entries.');
-    }
-  };
+    const [addPokemon, { error }] = useMutation(ADD_POKEMON, {
+        update(cache, { data: { addPokemon } }) {
+            try {
+                const { pokemons } = cache.readQuery({ query: QUERY_POKEMONS });
 
-  const loadMore = () => {
-    setPageNumber(pageNumber + 1);
-  };
+                cache.writeQuery({
+                    query: QUERY_POKEMONS,
+                    data: { pokemons: [addPokemon, ...pokemons] },
+                });
+            } catch (e) {
+                console.error(e);
+            }
+            const { me } = cache.readQuery({ query: QUERY_ME });
+            cache.writeQuery({
+                query: QUERY_ME,
+                data: { me: { ...me, pokemons: [...me.pokemons, addPokemon] } },
+            });
+        },
+    });
 
-  return (
-    <div className="container">
-      <h1 className="my-4">Pokemon Tracker</h1>
-      <div className="mb-3">
-        <input type="text" className="form-control mr-2" value={pokemonName} onChange={handleInputChange} />
-        <button className="btn btn-primary" onClick={handleSearch}>Search</button>
-      </div>
-      <div className="form-group">
-        <label htmlFor="sortSelect">Sort By:</label>
-        <select id="sortSelect" className="form-control" value={sortBy} onChange={handleSortChange}>
-          <option value="name">Name</option>
-          <option value="weight">Weight</option>
-          <option value="height">Height</option>
-        </select>
-      </div>
-      <div className="form-check mb-3">
-        <input type="checkbox" className="form-check-input" id="abilitiesCheck" checked={filterAbilities} onChange={handleFilterAbilitiesChange} />
-        <label className="form-check-label" htmlFor="abilitiesCheck">Filter by Abilities</label>
-      </div>
-      <div className="form-check mb-3">
-        <input type="checkbox" className="form-check-input" id="typesCheck" checked={filterTypes} onChange={handleFilterTypesChange} />
-        <label className="form-check-label" htmlFor="typesCheck">Filter by Types</label>
-      </div>
-      {error && <p className="error-message">{error}</p>}
-      {pokemonData && (
-        error
-      )}
-      {pokemonData && pokemonData.name !== '' && (
-        <div className="row">
-         
-            dataLength={pokemonEntries.length}
-            next={loadMore}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={<p>No more Pokemon entries to display.</p>}
-          
-            {pokemonEntries.map((entry, index) => (
-              <div className={`col-md-3 mb-4 PokemonEntry ${entry.type}`} key={index}>
-                <PokemonEntry
-                  name={entry.name}
-                  image={entry.image}
-                  type={entry.type} // Pass the type as a prop
-                  onDelete={handleDelete}
-                />
-              </div>
-            ))}
-          
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const { data } = await addPokemon({
+                variables: {
+                    number,
+                    pokeName,
+                    pokeType,
+                    image,
+                    pokeUser: Auth.getProfile().data.username,
+                    shiny: shiny
+                },
+            });
+
+            setShiny(false);
+            // eslint-disable-next-line no-lone-blocks
+            {
+                alert("Added to collection!");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleShiny = () => {
+        setShiny(!shiny);
+    };
+
+    // useEffect(() => {
+    //     console.log(shiny);
+    //   });
+
+    return (
+        <div>
+            {Auth.loggedIn() ? (
+                <>
+                    <Card style={{ width: '18rem' }} id="border-golden">
+                        <Button variant="primary" id="pokeCard" className="bg-red" onClick={handleFormSubmit} >Add Pokemon</Button>
+                        <Card.Text id='pokeCard' className="p-2">{number}</Card.Text>
+                        <Card.Img variant="top" src={`images/pokemon_sprites/${number}.png`} />
+                        <Card.Body>
+                            <Card.Title id='pokeCenter' className='cardTitle py-2 text-blue'>{pokeName}</Card.Title>
+                            <Badges
+                                _id={pokeName._id}
+                                pokeType={pokeType}
+                            ></Badges>
+                            <Form id="pokeText" className="px-1 pt-3">Shiny:
+                                <Form.Check
+                                    inline
+                                    type="switch"
+                                    id="custom-switch"
+                                    label=""
+                                    onClick={handleShiny}
+                                />
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </>
+            ) : (
+                <p>
+                    You need login to add Pokemon. Please{' '}
+                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+                </p>
+            )}
         </div>
-      )}
-    </div>
-  );
-}
+    );
+};
 
-export default App;
+export default PokemonCard;

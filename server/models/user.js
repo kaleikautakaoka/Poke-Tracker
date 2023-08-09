@@ -5,6 +5,13 @@ const bcrypt = require('bcrypt');
 const SavedPokemon = require('./SavedPokemon');
 
 const userSchema = new Schema({
+    id: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3
+    },
     username: {
         type: String,
         required: true,

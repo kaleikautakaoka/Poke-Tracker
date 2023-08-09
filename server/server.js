@@ -9,10 +9,7 @@ const { type } = require('os');
 const PORT = process.env.PORT || 3001;
 const app = express();
 require('dotenv').config();
-// server = new server instance that will be passed into ApolloServer
-//typeDefs = imported typeDefs from schemas/index.js
-//resolvers = imported resolvers from schemas/index.js
-//context = context function that will be passed into ApolloServer
+
 const server = new ApolloServer({
     typeDefs,
     resolvers,

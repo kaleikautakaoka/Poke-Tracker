@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const pokemonSchema = new Schema({
+    id: {
+        type: Number,
+        required: true,
+        unique: false
+    },
     name: {
         type: String,
         required: true,
@@ -14,14 +19,10 @@ const pokemonSchema = new Schema({
     description: {
         type: String
     },
-    donation: {
-        type: Number,
-        required: true,
-        min: 0.99
-    },
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
+        required: true
     }
 });
 

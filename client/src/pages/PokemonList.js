@@ -53,7 +53,6 @@ function preventDefault(event) {
 export default function PokeFragments() {
   return (
     <React.Fragment>
-      <Title>Recent PokeFragments</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
