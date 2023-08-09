@@ -23,6 +23,6 @@ const generationsSchema = new Schema({
 });
 
 
-const generations = mongoose.model('generations', generationsSchema);
+const Generations = mongoose.model('Generations', generationsSchema);
 
-module.exports = generations;
+module.exports = Generations;
