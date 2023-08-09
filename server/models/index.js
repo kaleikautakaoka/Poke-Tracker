@@ -8,9 +8,6 @@ const gen3_species = require('./gen3_species');
 const gen4_species = require('./gen4_species');
 const gen5_species = require('./gen5_species');
 const generations = require('./generations');
-const pokemon_species = require('./pokemon_species');
-const pokemon_v2_pokemonspecies_aggregate = require('./pokemon_v2_pokemonspecies_aggregate');
 const TestPokeApidata = require('./TestPokeApidata');
-const aggregate = require('./aggregate');
 
-module.exports = { Category, Pokemon, User, SavedPokemon, gen1_species, gen2_species, gen3_species, gen4_species, gen5_species, generations, pokemon_species, pokemon_v2_pokemonspecies_aggregate, TestPokeApidata, aggregate };
+module.exports = { Category, Pokemon, User, SavedPokemon, gen1_species, gen2_species, gen3_species, gen4_species, gen5_species, generations,  TestPokeApidata };

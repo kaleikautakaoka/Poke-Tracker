@@ -10,7 +10,7 @@ const savedPokemonSchema = new Schema({
     pokemons: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Pokemon'
+            ref: 'SavedPokemon'
         }
     ]
 });

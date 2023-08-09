@@ -21,6 +21,8 @@ import Signup from './pages/Signup';
 import NotFound from './pages/NotFound'; 
 import PokemonList from './pages/PokemonList';
 import Pokemonentry from './pages/Pokemonentry';
+import SearchPoke from './pages/SearchPoke';
+import Profile from './pages/Profile';
 
 
 const httpLink = createHttpLink({
@@ -52,10 +54,13 @@ function App() {
           
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/pokemonlist' element={<PokemonList />} /> 
+            <Route path='/Pokemonentry' element={<Pokemonentry />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/savedPoke' element={<NotFound />} />
             <Route path='/searchPoke' element={<Pokemonentry />} />
-            <Route path='*' element={<PokemonList />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/*' element={<NotFound />} />
+
           
        
 

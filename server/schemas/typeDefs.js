@@ -4,56 +4,50 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
 
     type Category {
-        _id: ID
         name: String
-        pokemon: [Pokemon]
     }
+   
+    type pokemonSchema {
+        name: String
+        image: String
+        description: String
+        donation: Int
+        category: Category
+    }  
 
     type gen3_species {
          name: String
-            id: ID
+        _id: ID
     }
 
     type generations {
         name: String
-        pokemon_species: pokemon_v2_pokemonspecies_aggregate {
-            aggregate {
-                count
-            }
-        }
-    }
-
-    type pokemon_species {
-        pokemon_v2_pokemonspecies_aggregate {
-            aggregate {
-                count
-            }
-        }
+        pokemon_species: Int
     }
 
     type gen1_species {
         name: String
-        id: ID
+        _id: ID
     }
 
     type gen2_species {
         name: String
-        id: ID
+       _id: ID
     }
 
     type gen4_species {
         name: String
-        id: ID
+        _id: ID
     }
 
     type gen5_species {
         name: String
-        id: ID
+        _id: ID
     }
 
     type TestPokeApidata {
         name: String
-        id: ID
+        _id: ID
     }
 
     type Pokemon {
@@ -84,18 +78,17 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID!
+        token: ID
         user: User
     }
 
     type Query {
         categories: [Category]
         pokemons(category: ID, name: String): [Pokemon]
-        Pokemon(_id: ID!): Pokemon
-        user: [User]!
-        user(userId: ID!): User
-        savedPokemon(--_id: ID!): SavedPokemon
-        donate(session [ID]): Donate
+        pokemon(_id: ID!): Pokemon
+        user: User
+        donation(_id: [ID]!): User
+        savedPokemon(_id: ID!): SavedPokemon
         me: User
         gen3_species: [gen3_species]
         generations: [generations]
@@ -103,7 +96,6 @@ const typeDefs = gql`
         gen2_species: [gen2_species]
         gen4_species: [gen4_species]
         gen5_species: [gen5_species]
-        pokemon_species(pokemon_v2_generation: aggregate): [pokemon_species]
         pokemon_species: generations
         pokemon_species: [pokemon_species]
         pokemon_species: TestPokeApidata
@@ -143,8 +135,6 @@ const typeDefs = gql`
         removePokemon(pokemon: ID!): SavedPokemon
 
         removeUser: User
-
-        testingPokeApi: 
 
         gen3_species: [gen3_species]
         generations: [generations]

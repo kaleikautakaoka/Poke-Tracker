@@ -5,7 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title';
 
 // Generate Order Data
 function createPokeData(id, name, type) {
@@ -54,7 +53,6 @@ function preventDefault(event) {
 export default function PokeFragments() {
   return (
     <React.Fragment>
-      <Title>Recent PokeFragments</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
