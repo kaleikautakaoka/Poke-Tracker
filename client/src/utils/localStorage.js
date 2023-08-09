@@ -1,3 +1,7 @@
+import getPokemonData from './getPokemonData';
+import getUserData from './getUserData';
+
+
 export const getPokemonData = () => {
     //fetch the data and return it to local storage
     const savedPokemon = localStorage.getItem('pokemon')
