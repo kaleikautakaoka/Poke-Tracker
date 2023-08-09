@@ -51,12 +51,6 @@ const typeDefs = gql`
         _id: ID
     }
 
-    type SavedPokemon {
-        _id: ID
-        donateDate: String
-        pokemon: [Pokemon]
-    }
-
     type User {
         _id: ID
         username: String
@@ -76,18 +70,12 @@ const typeDefs = gql`
         pokemons(category: ID, name: String): [Pokemon]
         pokemon(_id: ID!): Pokemon
         user: User
-        donation(_id: [ID]!): User
-        savedPokemon(_id: ID!): SavedPokemon
-        me: User
         gen3_species: [gen3_species]
         generations: [generations]
         gen1_species: [gen1_species]
         gen2_species: [gen2_species]
         gen4_species: [gen4_species]
         gen5_species: [gen5_species]
-        pokemon_species: generations
-        pokemon_species: [pokemon_species]
-        pokemon_species: TestPokeApidata
         generations: TestPokeApidata
 
     }
