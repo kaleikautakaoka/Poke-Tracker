@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import PokemonEntry from './Pokemonentry';
 
 function App() {
   const [pokemonName, setPokemonName] = useState('');

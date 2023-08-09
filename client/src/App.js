@@ -18,23 +18,17 @@ import { setContext } from '@apollo/client/link/context';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import NotFound from './pages/NotFound';
-import Donate from './components/Donation/Donate';
+import NotFound from './pages/NotFound'; 
+import PokemonList from './pages/PokemonList';
+import Pokemonentry from './pages/Pokemonentry';
 
-
-import ThankYou from './pages/ThankYou';
-import NAV from './components/Nav';
-
-require ('dotenv').config();
-const { GITHUB_TOKEN } = process.env;
 
 const httpLink = createHttpLink({
-  uri: 'https://api.github.com/graphql',
+  uri: '/graphql',
 });
 
-
 const authLink = setContext((_, { headers }) => {
-  const token = GITHUB_TOKEN;
+  const token = localStorage.getItem('id_token');
   return {
     headers: {
       ...headers,
@@ -54,18 +48,16 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-        <NAV>
+        
           
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/donate' element={<Donate />} />
-            <Route path='/savedPoke' element={<savedPoke />} />
-            <Route path='/searchPoke' element={<searchPoke />} />
-            <Route path='/thankyou' element={<ThankYou />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path='/savedPoke' element={<NotFound />} />
+            <Route path='/searchPoke' element={<Pokemonentry />} />
+            <Route path='*' element={<PokemonList />} />
           
-        </NAV>
+       
 
         </>
       </Router>
