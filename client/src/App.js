@@ -5,6 +5,15 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+//import pages and list them here
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import NotFound from './pages/NotFound'; 
+import PokemonList from './pages/PokemonList';
+import Pokemonentry from './pages/Pokemonentry';
+import SearchPoke from './pages/searchPoke';
+import Profile from './pages/Profile';
 
 import {
   ApolloClient,
@@ -14,15 +23,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-//import pages and list them here
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import NotFound from './pages/NotFound'; 
-import PokemonList from './pages/PokemonList';
-import Pokemonentry from './pages/Pokemonentry';
-import searchPoke from './pages/searchPoke';
-import Profile from './pages/Profile';
 
 
 const httpLink = createHttpLink({
@@ -57,7 +57,7 @@ function App() {
             <Route path='/pokemonlist' element={<PokemonList />} /> 
             <Route path='/Pokemonentry' element={<Pokemonentry />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/searchPoke' element={<searchPoke />} />
+            <Route path='/searchPoke' element={<SearchPoke />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/*' element={<NotFound />} />
 
