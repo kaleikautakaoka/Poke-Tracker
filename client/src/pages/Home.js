@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import PokemonEntry from './Pokemonentry';
 
 function App() {
@@ -133,13 +132,13 @@ function App() {
       )}
       {pokemonData && pokemonData.name !== '' && (
         <div className="row">
-          <InfiniteScroll
+         
             dataLength={pokemonEntries.length}
             next={loadMore}
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
             endMessage={<p>No more Pokemon entries to display.</p>}
-          >
+          
             {pokemonEntries.map((entry, index) => (
               <div className={`col-md-3 mb-4 PokemonEntry ${entry.type}`} key={index}>
                 <PokemonEntry
@@ -150,7 +149,7 @@ function App() {
                 />
               </div>
             ))}
-          </InfiniteScroll>
+          
         </div>
       )}
     </div>
