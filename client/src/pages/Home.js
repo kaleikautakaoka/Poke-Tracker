@@ -1,8 +1,7 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
-import { ADD_POKEMON } from '../../utils/mutations';
+import PokeFragments from '../../pages/PokemonList';
 import { QUERY_POKEMONS, QUERY_ME } from '../../utils/queries';
 
 
@@ -12,7 +11,7 @@ import Auth from '../../utils/auth';
 import { Card, Form, Button } from 'react-bootstrap';
 
 
-const PokemonCard = ({
+const Home = ({
     _id,
     number,
     pokeName,
@@ -25,6 +24,7 @@ const PokemonCard = ({
     const [shiny, setShiny] = useState(false);
 
     // console.log(number);
+    const { loading } = useQuery(QUERY_POKEMONS);
 
     const { data } = useQuery(QUERY_POKEMONS);
     const pokemons = data?.pokemons || [];
@@ -120,4 +120,4 @@ const PokemonCard = ({
     );
 };
 
-export default PokemonCard;
+export default Home;

@@ -1,3 +1,15 @@
+import { url } from "inspector";
+
+const getToken = (token) => {
+    return new fetch("/api/users", {
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+        },
+    });
+}
+
+
 export const createUser = async (userData) => {
     return new Promise((resolve, reject) => {
         fetch("/api/users", {
@@ -106,23 +118,11 @@ export const updateUser = async (userData, token) => {
     });
 }
 
-
 // export variables that gets a token, fetches user data, creates users, login users, saves pokemon, removes pokemon, and updates users and connects to the pokeApi
-export const getPokemonData = async (pokName, method, object) => {
-    return new Promise((resolve, reject) => {
-        const url = `https://pokeapi.co/api/v2/${method}/${object}/${pokName}`;
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                resolve(data);
-            }
-            )
-            .catch((err) => {
-                reject(err);
-            }
-            );
-    });
-}
+export const getPokemonData = (query) => {
+    return fetch(`https://pokeapi.co/api/v2/pokemon?q=${query}`);
+    
+};
 
 
 

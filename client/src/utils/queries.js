@@ -1,5 +1,34 @@
 import { gql } from "@apollo/client";
 
+export const QUERY_POKEMONS = gql`
+    query pokemons {
+        pokemons {
+            id
+            number
+            pokeName
+            pokeType
+            image
+        }
+    }
+`;
+
+export const QUERY_ME = gql`
+    query me {
+        me {
+            _id
+            username
+            email
+            pokemons {
+                _id
+                number
+                pokeName
+                pokeType
+                image
+            }
+        }
+    }
+`;
+
 export const QUERY_POKEMON_GEN_1 = gql`
     query gen1_species {
         gen1_species {
@@ -65,26 +94,6 @@ export const QUERY_POKEMON_SPECIES = gql`
                 aggregate {
                     count
                 }
-            }
-        }
-    }
-`;
-
-export const QUERY_POKEMON_AGGREGATE = gql`
-    query pokemon_v2_pokemonspecies_aggregate {
-        pokemon_v2_pokemonspecies_aggregate {
-            aggregate {
-                count
-            }
-        }
-    }
-`;
-
-export const QUERY_POKEMON_V2_POKEMONSPECIES_AGGREGATE = gql`
-    query pokemon_v2_pokemonspecies_aggregate {
-        pokemon_v2_pokemonspecies_aggregate {
-            aggregate {
-                count
             }
         }
     }

@@ -5,10 +5,11 @@ import App from './App';
 // import { ChakraProvider } from "@chakra-ui/react";
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.unstable_createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
