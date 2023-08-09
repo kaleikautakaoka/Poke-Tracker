@@ -1,6 +1,6 @@
-import { url } from "inspector";
 
-const getToken = (token) => {
+
+const getUser = (token) => {
     return new fetch("/api/users", {
         headers: {
             "Content-Type": "application/json",
