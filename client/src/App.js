@@ -21,7 +21,7 @@ import Signup from './pages/Signup';
 import NotFound from './pages/NotFound'; 
 import PokemonList from './pages/PokemonList';
 import Pokemonentry from './pages/Pokemonentry';
-import SearchPoke from './pages/SearchPoke';
+import searchPoke from './pages/searchPoke';
 import Profile from './pages/Profile';
 
 
@@ -57,7 +57,7 @@ function App() {
             <Route path='/pokemonlist' element={<PokemonList />} /> 
             <Route path='/Pokemonentry' element={<Pokemonentry />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/searchPoke' element={<Pokemonentry />} />
+            <Route path='/searchPoke' element={<searchPoke />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/*' element={<NotFound />} />
 
