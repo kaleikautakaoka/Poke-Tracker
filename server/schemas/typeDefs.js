@@ -100,28 +100,6 @@ const typeDefs = gql`
         pokemon_species: [pokemon_species]
         pokemon_species: TestPokeApidata
         generations: TestPokeApidata
-        pokemon_v2_pokemonspecies_aggregate: [pokemon_v2_pokemonspecies_aggregate]
-        donate:(pokemon: [ID]!): Donate
-        gen1_species(where: {pokemon_v2_generation: {name: {_eq: "generation-i"}}}, order_by: {id: asc}) {
-            name
-            id
-        }
-        gen2_species(where: {pokemon_v2_generation: {name: {_eq: "generation-ii"}}}, order_by: {id: asc}) {
-            name
-            id
-        }
-        gen3_species(where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}, order_by: {id: asc}) {
-            name
-            id
-        }
-        gen4_species(where: {pokemon_v2_generation: {name: {_eq: "generation-iv"}}}, order_by: {id: asc}) {
-            name
-            id
-        }
-        gen5_species(where: {pokemon_v2_generation: {name: {_eq: "generation-v"}}}, order_by: {id: asc}) {
-            name
-            id
-        }
 
     }
 
@@ -139,7 +117,6 @@ const typeDefs = gql`
         gen3_species: [gen3_species]
         generations: [generations]
         gen1_species: [gen1_species]
-        generations(pokemon_v2_generation: {name: {_eq: "generation-i"}}): TestPokeApidata
 
         addPokeTest(name: String!, id: ID!): TestPokeApidata
 
