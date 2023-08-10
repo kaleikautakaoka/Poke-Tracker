@@ -9,10 +9,10 @@ const typeDefs = gql`
     }
    
     type Pokemon {
+        _id: ID
         name: String
         image: String
         description: String
-        donation: Int
         category: Category
     }  
 
@@ -23,7 +23,7 @@ const typeDefs = gql`
 
     type Generations {
         name: String
-        pokemon_species: [pokemon_species]
+        _id: ID
     }
 
     type Gen1_species {
@@ -55,9 +55,7 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        password: String
-        categories: [Category]
-        savedpokemons: [SavedPokemon]
+        savedpokemon: [SavedPokemon]
     }
 
     type Auth {
