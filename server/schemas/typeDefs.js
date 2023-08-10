@@ -13,6 +13,7 @@ const typeDefs = gql`
         name: String
         image: String
         description: String
+        quantity: Int
         category: Category
     }  
 
@@ -38,7 +39,7 @@ const typeDefs = gql`
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
-        
+
         addPokemon(name: String!, description: String!, image: String!, category: ID!): Pokemon
 
         updateUser(username: String, email: String, password: String): User
