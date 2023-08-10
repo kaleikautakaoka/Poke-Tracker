@@ -3,7 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import { SEARCH_QUERY } from './graphqlQueries'; // Define your GraphQL query
 import NotFound from './NotFound';
 
-const SearchPage = () => {
+const SearchPoke = () => {
   const [query, setQuery] = useState('');
   const [search, { loading, data }] = useLazyQuery(SEARCH_QUERY);
 
@@ -17,7 +17,7 @@ const SearchPage = () => {
 
   return (
     <div>
-      <h1>Search Page</h1>
+      <h1>Search Pokemons</h1>
       <input
         type="text"
         value={query}
@@ -42,4 +42,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default SearchPoke;

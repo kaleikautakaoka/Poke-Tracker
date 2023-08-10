@@ -1,10 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Category, Pokemon, User, SavedPokemon, gen1_species, gen2_species, gen3_species, gen4_species, gen5_species, generations, pokemon_species, pokemon_v2_pokemonspecies_aggregate, TestPokeApidata  } = require('../models');
+const { Category, Pokemon, User, SavedPoke, Gen1_species, Gen2_species, Gen3_species, Gen4_species, Gen5_species, Generations, TestPokeApidata  } = require('../models');
 const { signToken } = require('../utils/auth');
 const { populate } = require('../models/Category');
-
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-
 
 
 const resolvers = {

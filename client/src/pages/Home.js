@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -108,8 +109,11 @@ function App() {
     setPageNumber(pageNumber + 1);
   };
 
+
+const Home = () => {
   return (
     <div className="container">
+
       <h1 className="my-4">Pokemon Tracker</h1>
       <div className="mb-3">
         <input
@@ -186,8 +190,9 @@ function App() {
           </InfiniteScroll>
         </div>
       )}
+
     </div>
   );
-}
+};
 
-export default App;
+export default Home;

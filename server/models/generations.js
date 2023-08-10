@@ -4,6 +4,7 @@ const { aggregate } = require("./aggregate");
 const { Schema } = mongoose;
 
 const generationsSchema = new Schema({
+
   generations: [
     {
       name: {
@@ -22,4 +23,5 @@ const generationsSchema = new Schema({
 
 const generations = mongoose.model("generations", generationsSchema);
 
-module.exports = generations;
+
+module.exports = Generations;
