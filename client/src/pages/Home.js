@@ -83,6 +83,8 @@ function App() {
     setHasMore(true); // Reset infinite scroll
   };
 
+
+
   const fetchPokemonEntries = async () => {
     try {
       let apiUrl = `/api/pokemon?page=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`;
@@ -190,8 +192,10 @@ const Home = () => {
           </InfiniteScroll>
         </div>
       )}
+      
 
     </div>
+
   );
 };
 
