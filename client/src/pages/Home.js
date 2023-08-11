@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PokemonEntry from "./Pokemonentry";
 
-function App() {
+export default function Home() {
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonData, setPokemonData] = useState(null);
   const [error, setError] = useState("");
@@ -83,8 +82,6 @@ function App() {
     setHasMore(true); // Reset infinite scroll
   };
 
-
-
   const fetchPokemonEntries = async () => {
     try {
       let apiUrl = `/api/pokemon?page=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}`;
@@ -111,11 +108,8 @@ function App() {
     setPageNumber(pageNumber + 1);
   };
 
-
-const Home = () => {
   return (
     <div className="container">
-
       <h1 className="my-4">Pokemon Tracker</h1>
       <div className="mb-3">
         <input
@@ -192,11 +186,6 @@ const Home = () => {
           </InfiniteScroll>
         </div>
       )}
-      
-
     </div>
-
   );
-};
-
-export default Home;
+}
